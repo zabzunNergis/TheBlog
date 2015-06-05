@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Blog.Models.Article>
+
+@Html.ActionLink("Upload An Image To The Gallery", "upload", "Home")
+
+@foreach (var imgPath in Directory.GetFiles(Server.MapPath("~/img"), "*.jpg"))
+{
+    var img = new FileInfo(imgPath);
+
+    <div class="image">
+
+        <img src="@Url.Content(String.Format("~/img/{0}", img.Name))" />
+
+    </div>
+  
+}
+

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Blog.Models.Article>
+
+@{
+    ViewBag.Title = "Articles";
+}
+
+<h2>Index</h2>
+
+@foreach (var item in Model) 
+{
+    <div class="article">
+       
+        <h4> @item.Title </h4>
+        <div>@Html.Raw(HttpUtility.HtmlDecode(item.Body))</div>
+     
+        @Html.ActionLink("Read Details", "Details", new { id = item.ID })
+        @Html.ActionLink("Add Comments", "Details", new { id = item.ID })
+    </div>
+}
+
+<div class="pagination">
+
+    Page:
+    @for (int k = 1; k <= ViewBag.TotalPages; k++)
+    {
+
+        <a class="@( k == ViewBag.CurrentPage ? "current" : "")" href="@Url.Action("Index", "Articles", new { page=k})"> @k  </a>
+    }
+
+</div>
